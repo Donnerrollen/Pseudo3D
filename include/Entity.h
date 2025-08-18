@@ -21,6 +21,7 @@ public:
 	float GetX() const;
 	float GetY() const;
 	float GetAngle() const;
+	int GetHP() const;
 	void takeDamage(int damage);
 };
 

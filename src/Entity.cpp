@@ -20,6 +20,10 @@ float Entity::GetAngle() const {
 	return angle;
 }
 
+int Entity::GetHP() const {
+	return hp;
+}
+
 void Entity::setHP(int new_hp) {
 	hp = new_hp;
 }
