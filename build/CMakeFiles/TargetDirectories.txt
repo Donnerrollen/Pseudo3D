@@ -1,4 +1,0 @@
-D:/Projects/C++/Pseudo3D/build/CMakeFiles/Engine.dir
-D:/Projects/C++/Pseudo3D/build/CMakeFiles/simple_tests.dir
-D:/Projects/C++/Pseudo3D/build/CMakeFiles/ALL_BUILD.dir
-D:/Projects/C++/Pseudo3D/build/CMakeFiles/ZERO_CHECK.dir
