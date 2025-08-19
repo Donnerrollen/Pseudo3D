@@ -63,8 +63,8 @@ void TestTakeDamageEntity() {
 	}
 }
 
-void TestAddWallMap() {
-	std::string name = "TestAddWallMap";
+void TestAddWallMap_1() {
+	std::string name = "TestAddWallMap_1";
 	Map map;
 	map.addWall(10, 10);
 	map.addWall(10, 20);
@@ -77,12 +77,27 @@ void TestAddWallMap() {
 	}
 }
 
+void TestAddWallMap_2() {
+	std::string name = "TestAddWallMap_2";
+	Map map;
+	map.addWall(10, 10);
+	map.addWall(10, 20);
+	map.addWall(10, 10);
+	const std::vector<std::unique_ptr<Wall>>& walls = map.getWalls();
+	if (walls.size() == 2) {
+		TestPassed(name);
+	}
+	else {
+		TestFailed(name);
+	}
+}
+
 int main() {
 	TestCreateWall();
 	TestCreatePlayer();
 	TestCreateEntity();
 	TestTakeDamageEntity();
-	TestAddWallMap();
-	TestAddWallMap();
+	TestAddWallMap_1();
+	TestAddWallMap_2();
 	std::cin.get();
 }
