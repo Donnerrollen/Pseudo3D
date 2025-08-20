@@ -1,7 +1,6 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-#include "Wall.h"
 #include "Player.h"
 #include <Map.h>
 
@@ -63,41 +62,10 @@ void TestTakeDamageEntity() {
 	}
 }
 
-void TestAddWallMap_1() {
-	std::string name = "TestAddWallMap_1";
-	Map map;
-	map.addWall(10, 10);
-	map.addWall(10, 20);
-	const std::vector<std::unique_ptr<Wall>>& walls = map.getWalls();
-	if ((*walls[0]).GetX() == 10 && (*walls[0]).GetY() == 10 && (*walls[1]).GetX() == 10 && (*walls[1]).GetY() == 20) {
-		TestPassed(name);
-	}
-	else {
-		TestFailed(name);
-	}
-}
-
-void TestAddWallMap_2() {
-	std::string name = "TestAddWallMap_2";
-	Map map;
-	map.addWall(10, 10);
-	map.addWall(10, 20);
-	map.addWall(10, 10);
-	const std::vector<std::unique_ptr<Wall>>& walls = map.getWalls();
-	if (walls.size() == 2) {
-		TestPassed(name);
-	}
-	else {
-		TestFailed(name);
-	}
-}
-
 int main() {
 	TestCreateWall();
 	TestCreatePlayer();
 	TestCreateEntity();
 	TestTakeDamageEntity();
-	TestAddWallMap_1();
-	TestAddWallMap_2();
 	std::cin.get();
 }

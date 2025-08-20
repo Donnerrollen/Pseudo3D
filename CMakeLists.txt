@@ -7,7 +7,8 @@ add_library(Engine STATIC
 	src/Entity.cpp
 	src/Map.cpp
 	src/Player.cpp
-	src/Wall.cpp
+	src/RayCasting.cpp
+	src/Game.cpp
 )
 
 target_include_directories(Engine

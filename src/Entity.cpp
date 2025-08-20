@@ -1,4 +1,5 @@
 #include "Entity.h"
+#define M_PI 3.14159265358979323846
 
 Entity::Entity(int new_hp, float new_x, float new_y, float new_speed, float new_angle) {
 	hp = new_hp;
@@ -41,11 +42,11 @@ void Entity::Turn(float dangle) {
 }
 
 float Entity::CalculateDX() {
-	return speed * cos(angle);
+	return speed * cos(angle * M_PI / 180.0);
 }
 
 float Entity::CalculateDY() {
-	return speed * sin(angle);
+	return speed * sin(angle * M_PI / 180.0);
 }
 
 //TODO
