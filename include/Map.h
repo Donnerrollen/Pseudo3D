@@ -13,11 +13,15 @@ private:
 
 	bool checkAccessToAddObj(float x, float y) const;
 public:
+	Map();
 	Map(int width, int height);
 	bool isWall(int x, int y);
-	void setPlayerPosition(float x, float y);
+	void setPlayerPosition(float x, float y, float angle);
+	void MakeFence();
 	void addWall(int x, int y);
 	void deleteWall(int x, int y);
+	const int getWidth();
+	const int getHeight();
 //	void addEnemy(float x, float y);
 	const Player& getPlayer() const;
 	const std::vector<std::vector<int>>& getGrid() const;

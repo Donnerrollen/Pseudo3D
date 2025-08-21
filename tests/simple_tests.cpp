@@ -3,6 +3,18 @@
 #include <vector>
 #include "Player.h"
 #include <Map.h>
+#include "Game.h"
+
+void PrintGridMap(const std::vector<std::vector<int>> grid, int width, int height, const Player& player) {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+			if (std::floor(player.GetX()) == j && std::floor(player.GetY()) == i) {
+				std::cout << "T" << " ";
+			} else std::cout << grid[i][j] << " ";
+		} 
+		std::cout << "\n";
+	}
+}
 
 void TestPassed(std::string NameTest) {
 	std::cout << "[PASSED] " << NameTest << std::endl;
@@ -11,18 +23,6 @@ void TestPassed(std::string NameTest) {
 
 void TestFailed(std::string NameTest) {
 	std::cout << "[FAILED] " << NameTest << std::endl;
-	return;
-}
-
-void TestCreateWall() {
-	std::string name = "TestCreateWall";
-	Wall wall(10, 11);
-	if (wall.GetX() == 10 && wall.GetY() == 11) {
-		TestPassed(name);
-	}
-	else {
-		TestFailed(name);
-	}
 	return;
 }
 
@@ -62,10 +62,41 @@ void TestTakeDamageEntity() {
 	}
 }
 
+void TestAddWallGrid() {
+	std::string name = "TestAddWallGrid";
+	Map map(5, 10);
+	auto& grid = map.getGrid();
+	map.addWall(4, 9);
+	map.addWall(0, 0);
+	map.addWall(1, 1);
+	if (grid[9][4] == 1 && grid[0][0] == 1 && grid[1][1] == 1) {
+		TestPassed(name);
+	}
+	else {
+		TestFailed(name);
+	}
+}
+
+void TestRayCasts() {
+	std::vector<float> res;
+	std::string name = "TestRayCasts";
+	Game game(5, 10);
+	game.map.setPlayerPosition(3.99, 8.99, 270);
+	game.map.MakeFence();
+	const auto& grid = game.map.getGrid();
+	PrintGridMap(grid, game.map.getWidth(), game.map.getHeight(), game.map.getPlayer());
+	res = game.raycaster.castsRays(game.map);
+	for (int i = 0; i < 320; i++) {
+		std::cout << res[i] << "\n";
+	}
+	return;
+}
+
 int main() {
-	TestCreateWall();
 	TestCreatePlayer();
 	TestCreateEntity();
 	TestTakeDamageEntity();
+	TestAddWallGrid();
+	TestRayCasts();
 	std::cin.get();
 }
