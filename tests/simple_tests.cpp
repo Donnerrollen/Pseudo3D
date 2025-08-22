@@ -110,6 +110,7 @@ void TestKeyboardSFML() {
 		hande.setInputState();
 		res = hande.getInputState();
 		system("cls");
+		std::cout << "Press escape to exit\n";
 		std::cout << "move: " << res.getMove() << std::endl;
 		std::cout << "turn: " << res.getTurn() << std::endl;
 		std::cout << "firing: " << res.getFiring() << std::endl;

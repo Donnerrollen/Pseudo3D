@@ -6,5 +6,5 @@ private:
 	InputState state;
 public:
 	const InputState& getInputState() const override;
-	void setInputState();
+	void setInputState() override;
 };

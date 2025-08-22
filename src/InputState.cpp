@@ -1,5 +1,11 @@
 #include "InputState.h"
 
+InputState::InputState() {
+	move = 0;
+	turn = 0;
+	isFiring = false;
+}
+
 InputState& InputState::operator=(const InputState& a) {
 	this->move = a.move;
 	this->turn = a.turn;

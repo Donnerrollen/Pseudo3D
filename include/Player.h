@@ -1,8 +1,9 @@
 #pragma once
 #include "Entity.h"
-#include <ICollision.h>
-#include <memory>
+#include "ICollision.h"
 #include "IInputHandler.h"
+#include <memory>
+
 
 class Map;
 

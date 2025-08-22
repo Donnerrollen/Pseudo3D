@@ -3,13 +3,18 @@
 #include "Map.h"
 #define M_PI 3.14159265358979323846f
 
-float DDACollision::DistToCollision(const Map& map) {
+float DDACollision::DistToCollision(const Map& map, bool straight) {
 	bool collision = false;
 	int stepY = 1;
 	int stepX = -1;
 
 	float dx = cos(map.getPlayer().GetAngle() * M_PI / 180.0f);
 	float dy = sin(map.getPlayer().GetAngle() * M_PI / 180.0f);
+
+	if (straight == false) {
+		dx *= -1;
+		dy *= -1;
+	}
 
 	float start_x = map.getPlayer().GetX();
 	float start_y = map.getPlayer().GetY();
