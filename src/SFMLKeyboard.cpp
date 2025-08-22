@@ -1,5 +1,5 @@
 #include "SFMLKeyboard.h"
-#include "SFML\Window\Keyboard.hpp"
+#include "SFML/Window/Keyboard.hpp"
 
 const InputState& SFMLKeyboard::getInputState() const {
 	return state;

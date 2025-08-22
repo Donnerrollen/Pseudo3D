@@ -3,7 +3,7 @@
 #include "Map.h"
 #define M_PI 3.14159265358979323846f
 
-float DDACollision::DistToCollision(const Map& map, bool straight) {
+float DDACollision::DistToCollision(const Map& map, bool straight) const{
 	bool collision = false;
 	int stepY = 1;
 	int stepX = -1;

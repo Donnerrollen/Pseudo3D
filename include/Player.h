@@ -12,9 +12,10 @@ class Player :
 {
 public:
     Player(int new_hp, float new_x, float new_y, float new_speed, float new_angle);
-    void Update(const ICollision& collisionsystem, const Map& map);
+    void update(const ICollision& collisionsystem, const Map& map);
+    void setInputHanler(std::unique_ptr<IInputHandler> new_inputHandler) const;
 
 private:
-    std::unique_ptr<IInputHandler> inputHandler;
+    mutable std::unique_ptr<IInputHandler> inputHandler;
 };
 

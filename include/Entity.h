@@ -4,9 +4,10 @@ class Entity
 {
 protected:
 	int hp;
-	float x, y;
+	mutable float x, y;
+	mutable  float angle;
 	float speed;
-	float angle;
+	float speedTurn;
 
 	float CalculateDX();
 	float CalculateDY();
@@ -18,6 +19,7 @@ protected:
 
 public:
 	Entity(int new_hp, float new_x, float new_y, float new_speed, float new_angle);
+	Entity(int new_hp, float new_x, float new_y, float new_speed, float new_speedTurn, float new_angle);
 	float GetX() const;
 	float GetY() const;
 	float GetAngle() const;

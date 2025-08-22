@@ -4,12 +4,16 @@
 #include "config.h"
 
 class Game {
-public: 
+public:
+	Map map;
+	RayCasting raycaster;
+	std::unique_ptr<ICollision> collisionSystem;
+
 	Game();
 	~Game();
 	Game(int w, int h);
 	Game(int w, int h, float field);
-	Map map;
-	RayCasting raycaster;
-	std::unique_ptr<ICollision> collisionSystem;
+	void update();
+	void setCollisionSystem(std::unique_ptr<ICollision> new_collisionSystem);
+
 };

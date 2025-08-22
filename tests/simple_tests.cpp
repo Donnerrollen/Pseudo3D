@@ -8,6 +8,7 @@
 #include "Game.h"
 #include <chrono>
 #include "SFMLKeyboard.h"
+#include "DDACollision.h"
 
 void PrintGridMap(const std::vector<std::vector<int>> grid, int width, int height, const Player& player) {
 	for (int i = 0; i < height; i++) {
@@ -116,6 +117,38 @@ void TestKeyboardSFML() {
 		std::cout << "firing: " << res.getFiring() << std::endl;
 		std::cout << "_________" << std::endl;
 	}
+	return;
+}
+
+void TestMovePlayerInMap() {
+	Game game;
+	game.map.MakeFence();
+	game.map.setPlayerPosition(4, 4, 0);
+	
+	game.map.getPlayer().setInputHanler(std::make_unique<SFMLKeyboard>());
+
+	const auto& grid = game.map.getGrid();
+
+	game.setCollisionSystem(std::make_unique<DDACollision>());
+
+	sf::Window window;
+	window.create(sf::VideoMode({ 800, 600 }), "My window");
+	
+	while (window.isOpen()) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			break;
+		}
+		game.update();
+		system("cls");
+		PrintGridMap(grid, game.map.getWidth(), game.map.getHeight(), game.map.getPlayer());
+		std::cout << "_________\n";
+		std::cout << "Press escape to exit\n";
+		std::cout << "p_x: " << game.map.getPlayer().GetX() << std::endl;
+		std::cout << "p_y: " << game.map.getPlayer().GetY() << std::endl;
+		std::cout << "p_angle: " << game.map.getPlayer().GetAngle() << std::endl;
+	}
+
+	return;
 }
 
 int main() {
@@ -125,6 +158,7 @@ int main() {
 	TestAddWallGrid();
 	TestRayCasts();
 	TestKeyboardSFML();
+	TestMovePlayerInMap();
 	std::getchar();
 	return 0;
 }

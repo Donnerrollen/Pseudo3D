@@ -16,3 +16,11 @@ Game::Game(int w, int h, float field) {
 	map = Map(w, h);
 	raycaster = RayCasting(field);
 }
+
+void Game::setCollisionSystem(std::unique_ptr<ICollision> new_collisionSystem) {
+	collisionSystem = std::move(new_collisionSystem);
+}
+
+void Game::update() {
+	map.getPlayer().update(*collisionSystem, map);
+}

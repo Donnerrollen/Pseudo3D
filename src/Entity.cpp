@@ -6,6 +6,16 @@ Entity::Entity(int new_hp, float new_x, float new_y, float new_speed, float new_
 	x = new_x;
 	y = new_y;
 	speed = new_speed;
+	speedTurn = 2;
+	angle = new_angle;
+}
+
+Entity::Entity(int new_hp, float new_x, float new_y, float new_speed, float new_speedTurn, float new_angle) {
+	hp = new_hp;
+	x = new_x;
+	y = new_y;
+	speed = new_speed;
+	speedTurn = new_speedTurn;
 	angle = new_angle;
 }
 
@@ -39,6 +49,12 @@ void Entity::takeDamage(int damage) {
 
 void Entity::Turn(float dangle) {
 	angle += dangle;
+	while (angle < 0) {
+		angle += 360;
+	}
+	while (angle > 360) {
+		angle -= 360;
+	}
 }
 
 float Entity::CalculateDX() {
@@ -49,11 +65,13 @@ float Entity::CalculateDY() {
 	return speed * sin(angle * M_PI / 180.0);
 }
 
-//TODO
 void Entity::move(float dx, float dy) {
+	x += dx;
+	y += dy;
 	return;
 }
 
+//TODO
 void Entity::fire() {
 	return;
 }
