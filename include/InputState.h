@@ -1,6 +1,7 @@
 #pragma once 
 class InputState {
 public:
+	InputState& operator=(const InputState& a);
 	int move; //1 - вперед, -1 - назад, 0 - на месте
 	int turn; //1 - вправо, -1 - влево, 0 - нет поворота
 	bool isFiring;

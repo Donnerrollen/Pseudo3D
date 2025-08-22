@@ -1,10 +1,13 @@
-#include <iostream>
+﻿#include <iostream>
 #include <memory>
 #include <vector>
+#include <cstdlib>
+#include "SFML/Window.hpp"
 #include "Player.h"
 #include <Map.h>
 #include "Game.h"
 #include <chrono>
+#include "SFMLKeyboard.h"
 
 void PrintGridMap(const std::vector<std::vector<int>> grid, int width, int height, const Player& player) {
 	for (int i = 0; i < height; i++) {
@@ -93,11 +96,34 @@ void TestRayCasts() {
 	return;
 }
 
+void TestKeyboardSFML() {
+	SFMLKeyboard hande;
+	sf::Window window;
+	window.create(sf::VideoMode({ 800, 600 }), "My window");
+	InputState res;
+
+	while (window.isOpen()) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
+			break;
+		}
+
+		hande.setInputState();
+		res = hande.getInputState();
+		system("cls");
+		std::cout << "move: " << res.getMove() << std::endl;
+		std::cout << "turn: " << res.getTurn() << std::endl;
+		std::cout << "firing: " << res.getFiring() << std::endl;
+		std::cout << "_________" << std::endl;
+	}
+}
+
 int main() {
 	TestCreatePlayer();
 	TestCreateEntity();
 	TestTakeDamageEntity();
 	TestAddWallGrid();
 	TestRayCasts();
-	std::cin.get();
+	TestKeyboardSFML();
+	std::getchar();
+	return 0;
 }

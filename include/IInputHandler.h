@@ -3,6 +3,6 @@
 
 class IInputHandler {
 public: 
-	~IInputHandler() = default;
-	virtual const InputState& getInputState() const;
+	virtual ~IInputHandler() = default;
+	virtual const InputState& getInputState() const = 0;
 };
