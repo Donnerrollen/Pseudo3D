@@ -9,6 +9,10 @@ add_library(Engine STATIC
 	src/Player.cpp
 	src/RayCasting.cpp
 	src/Game.cpp
+	src/config.cpp
+	src/DDACollision.cpp
+	src/SFMLKeyboard.cpp
+	src/InputState.cpp
 )
 
 target_include_directories(Engine

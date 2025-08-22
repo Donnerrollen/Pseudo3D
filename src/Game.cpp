@@ -5,6 +5,8 @@ Game::Game() {
 	raycaster = RayCasting(120);
 }
 
+Game::~Game() = default;
+
 Game::Game(int w, int h) {
 	map = Map(w, h);
 	raycaster = RayCasting(120);

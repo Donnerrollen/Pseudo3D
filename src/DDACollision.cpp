@@ -1,23 +1,21 @@
-#include <RayCasting.h>
-#include "config.h"
+#include "DDACollision.h"
+#include <iostream>
 #include "Map.h"
-#include <cmath>
-#include <vector>
 #define M_PI 3.14159265358979323846f
 
-RayCasting::RayCasting() {
-	FieldOfView = 120.0f;
-}
-
-RayCasting::RayCasting(float field) {
-	FieldOfView = field;
-	return;
-}
-
-float castRay(float start_x, float start_y, float dx, float dy, const std::vector<std::vector<int>>& grid) {
+float DDACollision::DistToCollision(const Map& map) {
 	bool collision = false;
 	int stepY = 1;
 	int stepX = -1;
+
+	float dx = cos(map.getPlayer().GetAngle() * M_PI / 180.0f);
+	float dy = sin(map.getPlayer().GetAngle() * M_PI / 180.0f);
+
+	float start_x = map.getPlayer().GetX();
+	float start_y = map.getPlayer().GetY();
+	
+	const auto& grid = map.getGrid();
+
 	if (dx > 0) stepX = 1;
 	if (dy > 0) stepY = -1;
 	int MapX = std::floor(start_x);
@@ -75,25 +73,8 @@ float castRay(float start_x, float start_y, float dx, float dy, const std::vecto
 	return std::sqrt((hitX - start_x) * (hitX - start_x) + (hitY - start_y) * (hitY - start_y));
 }
 
-std::vector<float> RayCasting::castsRays(const Map& map) {
-	const Player& player = map.getPlayer();
-	const auto& grid = map.getGrid();
-	float dx = 0;
-	float dy = 0;
-	float current_angle;
-	float player_x = player.GetX();
-	float player_y = player.GetY();
-	float ray_length = 0;
-	std::vector<float> rays_length_arr;
+/*
+void DDACollision::FireCollision(const Map& map) {
 
-	float start_angle = (player.GetAngle() + FieldOfView / 2) * M_PI / 180.0f;
-	float unit_angle_rad = (FieldOfView * M_PI) / (180.0f * rayCount);
-	for (int i = 0; i < rayCount; i++) {
-		current_angle = start_angle - (unit_angle_rad * i);
-		dx = cos(current_angle);
-		dy = sin(current_angle);
-		ray_length = castRay(player_x, player_y, dx, dy, grid);
-		rays_length_arr.push_back(ray_length);
-	}
-	return rays_length_arr;
 }
+*/

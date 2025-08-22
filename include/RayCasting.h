@@ -1,5 +1,7 @@
+#pragma once
 #include <vector>
-#include "Map.h"
+
+class Map;
 
 class RayCasting {
 private: 

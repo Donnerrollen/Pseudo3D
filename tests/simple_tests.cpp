@@ -4,6 +4,7 @@
 #include "Player.h"
 #include <Map.h>
 #include "Game.h"
+#include <chrono>
 
 void PrintGridMap(const std::vector<std::vector<int>> grid, int width, int height, const Player& player) {
 	for (int i = 0; i < height; i++) {
@@ -86,7 +87,7 @@ void TestRayCasts() {
 	const auto& grid = game.map.getGrid();
 	PrintGridMap(grid, game.map.getWidth(), game.map.getHeight(), game.map.getPlayer());
 	res = game.raycaster.castsRays(game.map);
-	for (int i = 0; i < 320; i++) {
+	for (int i = 0; i < rayCount; i++) {
 		std::cout << res[i] << "\n";
 	}
 	return;
