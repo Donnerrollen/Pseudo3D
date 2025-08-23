@@ -59,14 +59,16 @@ void SFMLRender::render(const Map& map, std::vector<float> rays) {
 
 	unitWidthWall = float(screenWidth / rayCount);
 
-	oneStepToWallHeight = screenHeight / 4;	
+	oneStepToWallHeight = screenHeight / 2;	
 
 	for (int i = 0; i < rayCount; i += 1) {
 		heightWallRay = oneStepToWallHeight / rays[i];
 
+
+
 		wallRectangle.setSize(sf::Vector2f(unitWidthWall, heightWallRay));
 		wallRectangle.setPosition(unitWidthWall * i, screenHeight / 2 - heightWallRay / 2);
-		wallRectangle.setFillColor(sf::Color(58, 51, 39));
+		wallRectangle.setFillColor(sf::Color(std::min(68 * 1.2f / rays[i], 116.0f), std::min(51 * 1.2f / rays[i], 102.0f), std::min(39 * 1.2f / rays[i], 78.0f)));
 		window.draw(wallRectangle);
 	}
 	window.display();

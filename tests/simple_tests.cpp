@@ -155,8 +155,13 @@ void TestMovePlayerInMap() {
 
 void TestSFMLRenderCreateWindow() {
 	std::string name = "TestSFMLRenderCreateWindow";
-	Game game(10, 10);
-	game.map.setPlayerPosition(4, 4, 0);
+	Game game(7, 7);
+	game.map.setPlayerPosition(1.5, 1.5, 0);
+
+	game.map.addWall(3, 3);
+	game.map.addWall(4, 4);
+	game.map.addWall(3, 4);
+	game.map.addWall(4, 3);
 
 	game.setCollisionSystem(std::make_unique<DDACollision>());
 	game.setRenderSystem(std::make_unique<SFMLRender>());
