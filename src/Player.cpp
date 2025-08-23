@@ -11,9 +11,9 @@ void Player::update(const ICollision& collisionsystem, const Map& map) {
 	comands = (*inputHandler).getInputState();
 
 	if (comands.getMove() != 0) {
-		float dist = collisionsystem.DistToCollision(map, (comands.getMove() == 1) ? true : false) - 0.05;
+		float dist = collisionsystem.DistToCollision(map, (comands.getMove() == 1) ? true : false) - 0.005;
 		dist = std::min(dist, speed);
-		if (dist >= 0.05) {
+		if (dist >= 0.005) {
 			float dx, dy;
 			dx = ((comands.getMove() == 1) ? 1 : -1) * cos(angle * M_PI / 180.0f) * dist;
 			dy = ((comands.getMove() == 1) ? 1 : -1) * sin(angle * M_PI / 180.0f) * dist;
@@ -25,7 +25,7 @@ void Player::update(const ICollision& collisionsystem, const Map& map) {
 	}
 }
 
-void Player::setInputHanler(std::unique_ptr<IInputHandler> new_inputHandler) const {
+void Player::setInputHandler(std::unique_ptr<IInputHandler> new_inputHandler) const {
 	inputHandler = std::move(new_inputHandler);
 	return;
 }

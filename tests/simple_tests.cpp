@@ -2,13 +2,15 @@
 #include <memory>
 #include <vector>
 #include <cstdlib>
-#include "SFML/Window.hpp"
 #include "Player.h"
 #include <Map.h>
 #include "Game.h"
 #include <chrono>
+#include "SFML/Window.hpp"
 #include "SFMLKeyboard.h"
 #include "DDACollision.h"
+#include "SFMLRender.h"
+#include "config.h"
 
 void PrintGridMap(const std::vector<std::vector<int>> grid, int width, int height, const Player& player) {
 	for (int i = 0; i < height; i++) {
@@ -100,7 +102,7 @@ void TestRayCasts() {
 void TestKeyboardSFML() {
 	SFMLKeyboard hande;
 	sf::Window window;
-	window.create(sf::VideoMode({ 800, 600 }), "My window");
+	window.create(sf::VideoMode({ screenWidth, screenHeight}), "My window");
 	InputState res;
 
 	while (window.isOpen()) {
@@ -124,20 +126,20 @@ void TestMovePlayerInMap() {
 	Game game;
 	game.map.MakeFence();
 	game.map.setPlayerPosition(4, 4, 0);
-	
-	game.map.getPlayer().setInputHanler(std::make_unique<SFMLKeyboard>());
+	game.map.getPlayer().setInputHandler(std::make_unique<SFMLKeyboard>());
 
 	const auto& grid = game.map.getGrid();
 
 	game.setCollisionSystem(std::make_unique<DDACollision>());
 
 	sf::Window window;
-	window.create(sf::VideoMode({ 800, 600 }), "My window");
+	window.create(sf::VideoMode({ screenWidth, screenHeight }), "My window");
 	
 	while (window.isOpen()) {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 			break;
 		}
+
 		game.update();
 		system("cls");
 		PrintGridMap(grid, game.map.getWidth(), game.map.getHeight(), game.map.getPlayer());
@@ -151,14 +153,29 @@ void TestMovePlayerInMap() {
 	return;
 }
 
+void TestSFMLRenderCreateWindow() {
+	std::string name = "TestSFMLRenderCreateWindow";
+	Game game(10, 10);
+	game.map.setPlayerPosition(4, 4, 0);
+
+	game.setCollisionSystem(std::make_unique<DDACollision>());
+	game.setRenderSystem(std::make_unique<SFMLRender>());
+	game.map.MakeFence();
+
+	game.map.getPlayer().setInputHandler(std::make_unique<SFMLKeyboard>());
+
+	game.update();
+}
+
 int main() {
-	TestCreatePlayer();
-	TestCreateEntity();
-	TestTakeDamageEntity();
-	TestAddWallGrid();
-	TestRayCasts();
-	TestKeyboardSFML();
-	TestMovePlayerInMap();
-	std::getchar();
+	//TestCreatePlayer();
+	//TestCreateEntity();
+	//TestTakeDamageEntity();
+	//TestAddWallGrid();
+	//TestRayCasts();
+	//TestKeyboardSFML();
+	//TestMovePlayerInMap();
+	TestSFMLRenderCreateWindow();
+	system("pause");
 	return 0;
 }

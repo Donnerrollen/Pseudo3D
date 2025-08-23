@@ -1,5 +1,5 @@
 #include "config.h"
 
-const int screenWidth = 640;
-const int screenHeight = 480;
-const int rayCount = 320;
+unsigned int screenWidth = 1280;
+unsigned int screenHeight = 960;
+unsigned int rayCount = 640;

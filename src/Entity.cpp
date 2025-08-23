@@ -6,7 +6,7 @@ Entity::Entity(int new_hp, float new_x, float new_y, float new_speed, float new_
 	x = new_x;
 	y = new_y;
 	speed = new_speed;
-	speedTurn = 2;
+	speedTurn = 0.2;
 	angle = new_angle;
 }
 

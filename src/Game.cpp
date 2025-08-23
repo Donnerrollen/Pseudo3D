@@ -1,4 +1,5 @@
 #include <Game.h>
+#include <iostream>
 
 Game::Game() {
 	map = Map(10, 10);
@@ -21,6 +22,15 @@ void Game::setCollisionSystem(std::unique_ptr<ICollision> new_collisionSystem) {
 	collisionSystem = std::move(new_collisionSystem);
 }
 
+void Game::setRenderSystem(std::unique_ptr<IRender> new_renderSystem) {
+	renderSystem = std::move(new_renderSystem);
+}
+
 void Game::update() {
-	map.getPlayer().update(*collisionSystem, map);
+	while ((*renderSystem).windowIsOpen()) {
+		map.getPlayer().update(*collisionSystem, map);
+		(*renderSystem).processEvents();
+		(*renderSystem).clean();
+		(*renderSystem).render(map, raycaster.castsRays(map));
+	}
 }

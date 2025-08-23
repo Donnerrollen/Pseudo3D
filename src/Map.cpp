@@ -22,7 +22,7 @@ Map::Map(int width, int height) {
 
 void Map::setPlayerPosition(float x, float y, float angle) {
 	if (checkAccessToAddObj(float(x), float(y))) {
-		player = std::make_unique<Player>(Player(100, x, y, 0.2, angle));
+		player = std::make_unique<Player>(Player(100, x, y, 0.006, angle));
 	}
 	return;
 }

@@ -1,5 +1,5 @@
 #pragma once
 
-extern const int screenWidth;
-extern const int screenHeight;
-extern const int rayCount;
+extern unsigned int screenWidth;
+extern unsigned int screenHeight;
+extern unsigned int rayCount;

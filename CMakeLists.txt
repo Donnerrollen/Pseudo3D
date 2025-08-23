@@ -27,6 +27,7 @@ add_library(Engine STATIC
 	src/DDACollision.cpp
 	src/SFMLKeyboard.cpp
 	src/InputState.cpp
+	src/SFMLRender.cpp
 )
 
 target_include_directories(Engine
