@@ -6,7 +6,7 @@
 #define M_PI 3.14159265358979323846f
 
 RayCasting::RayCasting() {
-	FieldOfView = 120.0f;
+	FieldOfView = standartViewField;
 }
 
 RayCasting::RayCasting(float field) {
@@ -80,20 +80,22 @@ std::vector<float> RayCasting::castsRays(const Map& map) {
 	const auto& grid = map.getGrid();
 	float dx = 0;
 	float dy = 0;
-	float current_angle;
+	double current_angle;
 	float player_x = player.GetX();
 	float player_y = player.GetY();
+	double player_angle = player.GetAngle() * M_PI / 180.0f;
 	float ray_length = 0;
-	std::vector<float> rays_length_arr;
+	std::vector<float> perp_rays_length_arr;
 
-	float start_angle = (player.GetAngle() + FieldOfView / 2) * M_PI / 180.0f;
-	float unit_angle_rad = (FieldOfView * M_PI) / (180.0f * rayCount);
+	double start_angle = (player.GetAngle() + FieldOfView / 2) * M_PI / 180.0f;
+	double unit_angle_rad = (FieldOfView * M_PI) / (180.0f * rayCount);
 	for (int i = 0; i < rayCount; i++) {
 		current_angle = start_angle - (unit_angle_rad * i);
 		dx = cos(current_angle);
 		dy = sin(current_angle);
 		ray_length = castRay(player_x, player_y, dx, dy, grid);
-		rays_length_arr.push_back(ray_length);
+		ray_length *= cos(player_angle - current_angle);
+		perp_rays_length_arr.push_back(ray_length);
 	}
-	return rays_length_arr;
+	return perp_rays_length_arr;
 }

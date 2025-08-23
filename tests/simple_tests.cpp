@@ -176,6 +176,5 @@ int main() {
 	//TestKeyboardSFML();
 	//TestMovePlayerInMap();
 	TestSFMLRenderCreateWindow();
-	system("pause");
 	return 0;
 }

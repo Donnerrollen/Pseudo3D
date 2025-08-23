@@ -3,14 +3,14 @@
 
 Game::Game() {
 	map = Map(10, 10);
-	raycaster = RayCasting(120);
+	raycaster = RayCasting(standartViewField);
 }
 
 Game::~Game() = default;
 
 Game::Game(int w, int h) {
 	map = Map(w, h);
-	raycaster = RayCasting(120);
+	raycaster = RayCasting(standartViewField);
 }
 
 Game::Game(int w, int h, float field) {
@@ -33,4 +33,5 @@ void Game::update() {
 		(*renderSystem).clean();
 		(*renderSystem).render(map, raycaster.castsRays(map));
 	}
+	return;
 }

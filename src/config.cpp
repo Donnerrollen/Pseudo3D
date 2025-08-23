@@ -1,5 +1,6 @@
 #include "config.h"
 
-unsigned int screenWidth = 1280;
-unsigned int screenHeight = 960;
-unsigned int rayCount = 640;
+unsigned int screenWidth = 2560;
+unsigned int screenHeight = 1920;
+unsigned int rayCount = 1280;
+float standartViewField = 60;
