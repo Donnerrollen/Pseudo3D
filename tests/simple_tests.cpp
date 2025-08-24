@@ -160,8 +160,6 @@ void TestSFMLRenderCreateWindow() {
 
 	game.map.addWall(3, 3);
 	game.map.addWall(4, 4);
-	game.map.addWall(3, 4);
-	game.map.addWall(4, 3);
 
 	game.setCollisionSystem(std::make_unique<DDACollision>());
 	game.setRenderSystem(std::make_unique<SFMLRender>());
