@@ -1,5 +1,7 @@
-#include <Game.h>
 #include <iostream>
+#include <chrono>
+#include <Game.h>
+#define NANOSECONDS_IN_SECOND 1000000000.0f
 
 Game::Game() {
 	map = Map(10, 10);
@@ -27,8 +29,18 @@ void Game::setRenderSystem(std::unique_ptr<IRender> new_renderSystem) {
 }
 
 void Game::update() {
+	std::chrono::steady_clock::time_point current;
+	std::chrono::steady_clock::time_point previous;
+	std::chrono::nanoseconds elapsed;
+	float dir;
+	
 	while ((*renderSystem).windowIsOpen()) {
-		map.getPlayer().update(*collisionSystem, map);
+		current = std::chrono::steady_clock::now();
+		elapsed = current - previous;
+		dir = std::chrono::duration<float>(elapsed).count();
+		map.getPlayer().update(*collisionSystem, map, dir);
+		previous = current;
+
 		(*renderSystem).processEvents();
 		(*renderSystem).clean();
 		(*renderSystem).render(map, raycaster.castsRays(map));

@@ -29,14 +29,11 @@ void SFMLRender::processEvents() {
     }
 }
 
-//Ќадо отдельно рисовать небо с землей, потом можно добавить анимацию
 void SFMLRender::clean() {
 	window.clear();
 }
 
 void SFMLRender::drawRoofFloor() {
-	//пол (37, 50, 30)
-
 	sf::RectangleShape rectangle(sf::Vector2f(screenWidth, screenHeight / 2));
 	rectangle.setPosition(0, 0);
 	rectangle.setFillColor(sf::Color(37, 47, 64));

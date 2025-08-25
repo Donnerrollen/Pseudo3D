@@ -4,16 +4,16 @@
 
 Player::Player(int new_hp, float new_x, float new_y, float new_speed, float new_angle) : Entity(new_hp, new_x, new_y, new_speed, new_angle) {}
 
-void Player::update(const ICollision& collisionsystem, const Map& map) {
+void Player::update(const ICollision& collisionsystem, const Map& map, float dir) {
 	InputState comands;
 	(*inputHandler).setInputState();
 
 	comands = (*inputHandler).getInputState();
 
 	if (comands.getMove() != 0) {
-		float dist = collisionsystem.DistToCollision(map, (comands.getMove() == 1) ? true : false) - 0.005;
-		dist = std::min(dist, speed);
-		if (dist >= 0.005) {
+		float dist = collisionsystem.DistToCollision(map, (comands.getMove() == 1) ? true : false) - 0.005 * dir;
+		dist = std::min(dist, speed * dir);
+		if (dist >= 0.005 * dir) {
 			float dx, dy;
 			dx = ((comands.getMove() == 1) ? 1 : -1) * cos(angle * M_PI / 180.0f) * dist;
 			dy = ((comands.getMove() == 1) ? 1 : -1) * sin(angle * M_PI / 180.0f) * dist;
@@ -21,7 +21,7 @@ void Player::update(const ICollision& collisionsystem, const Map& map) {
 		}
 	}
 	if (comands.getTurn() != 0) {
-		Turn(speedTurn * ((comands.getTurn() == 1) ? -1 : 1));
+		Turn(speedTurn * dir * ((comands.getTurn() == 1) ? -1 : 1));
 	}
 }
 

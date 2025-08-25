@@ -1,4 +1,5 @@
 #include "Map.h"
+#include "config.h"
 
 Map::Map() {
 	gridHeight = 10;
@@ -22,7 +23,7 @@ Map::Map(int width, int height) {
 
 void Map::setPlayerPosition(float x, float y, float angle) {
 	if (checkAccessToAddObj(float(x), float(y))) {
-		player = std::make_unique<Player>(Player(100, x, y, 0.006, angle));
+		player = std::make_unique<Player>(Player(100, x, y, standartPlayerSpeed, angle));
 	}
 	return;
 }

@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "config.h"
 #define M_PI 3.14159265358979323846
 
 Entity::Entity(int new_hp, float new_x, float new_y, float new_speed, float new_angle) {
@@ -6,7 +7,7 @@ Entity::Entity(int new_hp, float new_x, float new_y, float new_speed, float new_
 	x = new_x;
 	y = new_y;
 	speed = new_speed;
-	speedTurn = 0.2;
+	speedTurn = standartPlayerTurnSpeed;
 	angle = new_angle;
 }
 
